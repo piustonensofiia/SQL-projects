@@ -1,0 +1,41 @@
+-- Piustonen Sofiia, KM-03
+-- SELECT vend_name  ', '  vend_country AS vendor_country FROM vendors
+-- SELECT prod_id, order_num, quantity, item_price, item_price * quantity AS expanded_price
+-- FROM orderitems WHERE order_num = 20008
+
+-- SELECT LOWER(cust_name  ', '  cust_country) AS customers_countries
+-- FROM customers
+
+-- SELECT UPPER(vend_name  ', '  vend_country) AS vendor_name
+-- FROM vendors
+
+-- SELECT AVG(prod_price) AS avg_price FROM products
+-- SELECT AVG(item_price) AS sale_avg_price FROM orderitems
+-- SELECT MAX(prod_price) AS max_price FROM products
+-- SELECT MIN(prod_price) AS min_price FROM products
+-- SELECT MIN(item_price) AS sale_min_price FROM orderitems
+
+-- SELECT prod_name, prod_price AS cheapest_product FROM products 
+-- WHERE prod_price = (SELECT MIN(prod_price) AS min_price FROM products)
+
+-- SELECT prod_name, prod_price AS expensive_product FROM products 
+-- WHERE prod_id IN (SELECT prod_id FROM orderitems 
+-- WHERE item_price = (SELECT MAX(item_price) FROM orderitems))
+
+-- SELECT COUNT(DISTINCT cust_name) AS amount_diff_cust FROM customers;
+
+-- SELECT COUNT(cust_name) AS cust_with_email FROM customers 
+-- WHERE cust_email IS NOT Null
+
+-- SELECT COUNT(vend_name) AS vend_from_USA FROM vendors WHERE vend_country = 'USA'
+
+-- SELECT COUNT(order_item) AS order_num_20005 FROM orderitems 
+-- WHERE order_num = 20005
+
+-- SELECT SUM(quantity * item_price) FROM orderitems WHERE order_num = 20005
+
+-- SELECT SUM(quantity) FROM orderitems
+-- WHERE item_price = (SELECT MAX(item_price) FROM orderitems)
+
+-- SELECT SUM(quantity) FROM orderitems
+-- WHERE item_price = (SELECT MIN(item_price) FROM orderitems)

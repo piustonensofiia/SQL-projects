@@ -1,0 +1,130 @@
+--1 Вивести vend_id, vend_name постачальників, що постачають товари,
+--та prod_id відповідних товарів
+
+--SELECT vendors.vend_id, vend_name, prod_id FROM vendors JOIN products 
+--ON products.vend_id = vendors.vend_id
+
+--2 Вивести vend_id, vend_name усіх постачальників та prod_id 
+--товарів, які вони постачають
+
+--SELECT V.vend_id, vend_name, prod_id FROM vendors V LEFT JOIN products 
+--ON V.vend_id = products.vend_id
+
+--3 Вивести vend_id, vend_name постачальників, що не постачають товари.
+
+--SELECT V.vend_id, vend_name, prod_id FROM vendors V LEFT JOIN products 
+--ON V.vend_id = products.vend_id 
+--WHERE prod_id IS null
+
+--4 Вивести vend_id, vend_name та кількість товарів, яку пропонує 
+--кожен з постачальників. Поля у відповіді позначити vend_id, vend_name, num_prods
+
+--SELECT V.vend_id, vend_name, COUNT(prod_id) as num_prods FROM vendors V LEFT JOIN products 
+--ON V.vend_id = products.vend_id
+--GROUP BY V.vend_id
+
+--5 Виконати запит 4, відповідь впорядкувати за полем vend_name
+
+--SELECT V.vend_id, vend_name, COUNT(prod_id) as num_prods FROM vendors V LEFT JOIN products 
+--ON V.vend_id = products.vend_id
+--GROUP BY V.vend_id
+--ORDER BY vend_name
+
+--6 Вивести vend_name та кількість товарів, яку пропонує кожен з 
+--постачальників, якщо ця кількість більше 2. Поля у відповіді 
+--позначити vend_name, num_prods. Відповідь впорядкувати за полем vend_name.
+
+--SELECT v.vend_id, vend_name, COUNT(prod_id) AS num_prods FROM vendors V LEFT JOIN products
+--ON v.vend_id = products.vend_id
+--GROUP BY v.vend_id
+--HAVING count(prod_id) > 2
+--ORDER BY vend_name
+
+-- 7 Вивести cust_id, cust_name покупців, що купували товари, та номери їх замовлень
+
+--SELECT c.cust_id, cust_name, order_num FROM customers c JOIN orders 
+--ON orders.cust_id = c.cust_id
+
+--8 Вивести cust_id, cust_name усіх покупців та номери відповідних замовлень
+
+--SELECT C.cust_id, cust_name, order_num FROM customers C LEFT JOIN orders 
+--ON orders.cust_id = C.cust_id
+
+-- 9 Вивести cust_id, cust_name покупців, що не мають замовлень
+
+--SELECT C.cust_id, cust_name, order_num FROM customers C LEFT JOIN orders 
+--ON orders.cust_id = C.cust_id
+--WHERE order_num IS NULL
+
+-- 10 Вивести cust_id, cust_name та кількість замовлень кожного покупця.
+
+--SELECT C.cust_id, cust_name, COUNT(order_num) AS order_num FROM customers C LEFT JOIN orders 
+--ON orders.cust_id = C.cust_id
+--GROUP BY C.cust_id
+
+-- 11 Виконати запит 10, відповідь впорядкувати за полем cust_name
+
+--SELECT C.cust_id, cust_name, COUNT(order_num) AS order_num FROM customers C LEFT JOIN orders 
+--ON orders.cust_id = C.cust_id
+--GROUP BY C.cust_id
+--ORDER BY cust_name
+
+-- 12 Вивести cust_id, cust_name покупців, що мають рівно 1 замовлення. 
+-- Відповідь впорядкувати за полем cust_name
+
+--SELECT C.cust_id, cust_name, COUNT(order_num) AS order_num FROM customers C LEFT JOIN orders 
+--ON orders.cust_id = C.cust_id
+--GROUP BY C.cust_id
+--HAVING COUNT(order_num) = 1
+--ORDER BY cust_name
+
+--13 Вивести cust_id, cust_name усіх покупців та кількість і ціну товарів, 
+--які вони замовляли
+
+--SELECT C.cust_id, cust_name, SUM(quantity) AS quantity, SUM(item_price) AS item_price FROM customers C LEFT JOIN 
+--(orders JOIN orderitems ON orders.order_num = orderitems.order_num)
+--ON orders.cust_id = C.cust_id
+--GROUP BY C.cust_id
+
+
+-- 14 Вивести cust_id, cust_name усіх покупців та на яку загальну суму 
+--вони замовили товарів. Поля у відповіді позначити cust_id, cust_name, total
+
+--SELECT customers.cust_id, cust_name, SUM(quantity*item_price) AS total FROM customers JOIN 
+--(orders JOIN orderitems ON orders.order_num = orderitems.order_num)
+--ON customers.cust_id = orders.cust_id
+--GROUP BY customers.cust_id
+
+--15 Виконати запит 14. Відповідь впорядкувати за cust_name
+
+--SELECT customers.cust_id, cust_name, SUM(quantity*item_price) AS total FROM customers JOIN 
+--(orders JOIN orderitems ON orders.order_num = orderitems.order_num)
+--ON customers.cust_id = orders.cust_id
+--GROUP BY customers.cust_id
+--ORDER BY cust_name
+
+-- 16 На основі запиту 14 вивести лише тих покупців, які замовили 
+--товарів на суму більшу, ніж $3000. Позначити поле cust_name як vip_client.
+
+--SELECT customers.cust_id, cust_name AS vip_client , SUM(quantity*item_price) AS total FROM customers JOIN 
+--(orders JOIN orderitems ON orders.order_num = orderitems.order_num)
+--ON customers.cust_id = orders.cust_id
+--GROUP BY customers.cust_id
+--HAVING SUM(quantity*item_price) > 3000
+
+-- 17 На основі запиту 14 вивести тих покупців, які замовили товарів на 
+--суму меншу, ніж $1000. Позначити поле cust_name як common_client.
+
+--SELECT customers.cust_id, cust_name AS common_client, SUM(quantity*item_price) AS total FROM customers JOIN 
+--(orders JOIN orderitems ON orders.order_num = orderitems.order_num)
+--ON customers.cust_id = orders.cust_id
+--GROUP BY customers.cust_id
+--HAVING SUM(quantity*item_price) < 1000
+
+-- 18 Виконати запит 17. Відповідь впорядкувати за загальною сумою.
+--SELECT customers.cust_id, cust_name AS common_client, SUM(quantity*item_price) AS total FROM customers JOIN 
+--(orders JOIN orderitems ON orders.order_num = orderitems.order_num)
+--ON customers.cust_id = orders.cust_id
+--GROUP BY customers.cust_id
+--HAVING SUM(quantity*item_price) < 1000
+--ORDER BY total
