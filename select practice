@@ -1,0 +1,60 @@
+--Вивести всі стовпці таблиці customers ( vendors / orders / products / orderitems )
+--SELECT * FROM customers
+
+--Вивести назви всіх товарів
+--SELECT prod_name FROM products
+
+--Вивести імена та адреси покупців
+--SELECT cust_name, cust_adress FROM customers
+
+--Вивести імена та країни постачальників
+--SELECT vend_name, vend_country FROM vendors
+
+--Вивести всі замовлення разом з їх елементами та ID проданих товарів
+--SELECT order_num, order_item, prod_id FROM orderitems
+
+--Вивести всю інформацію про покупців, розташувавши імена покупців в алфавітному порядку
+--SELECT * FROM customers ORDER BY cust_name
+
+--Вивести ID товарів, назви товарів та їх ціну - в порядку спадання ціни
+--SELECT prod_id, prod_name, prod_price FROM products ORDER BY prod_price DESC
+
+--Вивести всі замовлення, впорядкувавши їх за номером, в зворотному поряку
+--SELECT * FROM orders ORDER BY order_num DESC
+
+--Вивести всі замовлення, впорядкувавши їх за датами (спочатку йдуть більш нові)
+--SELECT * FROM orders ORDER BY order_date DESC
+
+--Вивести всі замовлення - від останнього до першого, елементи всередині замовлень розташувати в порядку 1, 2, 3, ...
+--SELECT * FROM orderitems ORDER BY order_num DESC, order_item
+
+--Вивести товари, ціна яких дорівнює 3.49 (поля: назва товару, ціна товару)
+--SELECT prod_name, prod_price FROM products WHERE prod_price = 3.49
+
+--Вивести товари, ціна яких не перевищує 9.0 (назва товару, ціна товару)
+--SELECT prod_name, prod_price FROM products WHERE prod_price <= 9
+
+--Вивести товари, ціна яких знаходиться в межах [5; 10] (назва товару, ціна товару)
+--SELECT prod_name, prod_price FROM products WHERE prod_price BETWEEN 5 AND 10
+
+--Вивести товари, що постачаються не DLL01 (назва товару, ID постачальника)
+--SELECT prod_name FROM products WHERE vend_id <> 'DLL01'
+
+--Вивести товари, що постачаються DLL01 та FNG01 (назва товару, ID постачальника) 
+--SELECT prod_name FROM products WHERE vend_id = 'DLL01' OR vend_id = 'FNG01'
+
+-- Вивести всіх покупців, що мають пошту
+--SELECT cust_name AS Customer FROM customers
+--WHERE cust_email IS NOT NULL
+
+-- Вивести всіх покупців, що не мають пошти
+--SELECT cust_name AS Customer FROM customers
+--WHERE cust_email IS NULL
+
+-- Вивести всіх постачальників, що живуть за межами США (не вказано штат)
+--SELECT vend_name AS Vendor FROM vendors
+--WHERE vend_state IS NULL
+
+-- Вивести список товарів, що не мають ціни
+--SELECT prod_name AS ProdList FROM products
+--WHERE prod_price IS NULL
